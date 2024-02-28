@@ -7,6 +7,7 @@ public class Claw extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        System.out.println("C.L.A.W. has started");
         // Register commands
         getCommand("claw").setExecutor(new ClawCommand(this));
         // Register subcommands

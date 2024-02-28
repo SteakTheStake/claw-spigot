@@ -5,17 +5,22 @@ api-version: '1.20'
 authors: [ StakeTheSteak ]
 description: C.L.A.W. (Collect, Locate, Annihilate, Win)
 website: https://summitmc.xyz/
+configuration-file: api_key.yml
 commands:
-  claw-generate:
-    description: Generates a challenge for the current in-game day
-    usage: /claw-generate
-    permission: claw.generate
-    permission-message: &noperms "§cError: §fNo permission!"
-  claw-open:
-    description: Opens the menu GUI for C.L.A.W.
-    usage: /claw-open
-    permission: claw.open
-    permission-message: &noperms "§cError: §fNo permission!"
+  claw:
+    description: Root command for C.L.A.W.
+    aliases:
+      - cl
+    usage: /<command> [open|generate]
+    subcommands:
+      open:
+        description: Opens the menu GUI for C.L.A.W.
+        usage: /claw open
+        permission: claw.open
+      generate:
+        description: Generates a challenge for the current in-game day
+        usage: /claw generate
+        permission: claw.generate
 permissions:
   claw.open:
     description: Allows players to open the C.L.A.W. GUI.

@@ -18,11 +18,6 @@ public class ClawCommand implements CommandExecutor {
         this.plugin = plugin;
     }
 
-    public ClawCommand(String generate) {
-
-        plugin = new Claw();
-    }
-
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (args.length == 0) {

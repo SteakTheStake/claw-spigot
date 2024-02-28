@@ -19,21 +19,20 @@ import java.util.Objects;
 
 public class ClawGUI implements Listener {
     private static Inventory ClawGUI;
-    private static Inventory inventory = Bukkit.createInventory(null, 9, "C.L.A.W. GUI");
+    private static Inventory inventory = Bukkit.createInventory(null, 45, "C.L.A.W. GUI");
 
 
     public void initializeItems() {
-        // Consider slots like 4 for "Generate" and 8 for "Exit"
-        inventory.setItem(4, createGuiItem(Material.PAPER, "§l§2GENERATE", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inventory.setItem(8, createGuiItem(Material.BARRIER, "§l§2Exit"));
+        inventory.setItem(0, createGuiItem(Material.PAPER, "§l§2GENERATE", "§agenerates a challenge", "§band archives the previous challenge"));
+        inventory.setItem(40, createGuiItem(Material.BARRIER, "§l§2Exit"));
     }
 
     public ClawGUI() {
         // Create a new inventory, with no owner (as this isn't a real inventory), a size of nine, called example
-        InventoryType type = InventoryType.BARREL;
+        InventoryType type = InventoryType.CHEST;
 
         // Assign the new inventory to the this.inventory field
-        inventory = Bukkit.createInventory(null, 9, "C.L.A.W. GUI");
+        inventory = Bukkit.createInventory(null, 45, "C.L.A.W. GUI");
 
         // Put the items into the inventory
         initializeItems();
@@ -80,17 +79,15 @@ public class ClawGUI implements Listener {
             String displayName = clickedItem.getItemMeta().getDisplayName();
 
             if (displayName.equals("§l§2GENERATE")) {
-                // Here you would run the generate command logic instead of sending a message
                 String challenge = OpenAIRequestHandler.generateChallenge();
                 player.sendMessage("Generated Challenge: " + challenge);
-                // Optionally close the inventory after generating
+
                 player.closeInventory();
             } else if (displayName.equals("§l§2Exit C.L.A.W.")) {
-                player.closeInventory(); // Close the GUI
+                player.closeInventory();
             }
         }
     }
-    // Cancel dragging in our inventory
     @EventHandler
     public void onInventoryClick(final @NotNull InventoryDragEvent e) {
         if (e.getInventory().equals(inventory)) {
