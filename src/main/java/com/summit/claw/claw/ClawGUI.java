@@ -24,7 +24,7 @@ public class ClawGUI implements Listener {
 
     public void initializeItems() {
         inventory.setItem(0, createGuiItem(Material.PAPER, "§l§2GENERATE", "§agenerates a challenge", "§band archives the previous challenge"));
-        inventory.setItem(40, createGuiItem(Material.BARRIER, "§l§2Exit"));
+        inventory.setItem(40, createGuiItem(Material.BARRIER, "§l§cExit"));
     }
 
     public ClawGUI() {
