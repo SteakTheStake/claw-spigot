@@ -14,21 +14,22 @@ public class Claw extends JavaPlugin {
         // Register subcommands
 
         // Claw generate command
-        if ((this.getCommand("claw generate") == null)) {
-            getLogger().severe("Command 'claw generate' not found. Check plugin.yml");
+        if ((this.getCommand("generate") == null)) {
+            getLogger().severe("Command 'generate' not found. Check plugin.yml");
         } else {
-            getCommand("claw generate").setExecutor(new ClawCommand(this));
+            getCommand("generate").setExecutor(new ClawCommand(this));
         }
 
         // Claw open command
-        if (this.getCommand("claw open") == null) {
-            getLogger().severe("Command 'claw open' not found. Check plugin.yml");
+        if (this.getCommand("open") == null) {
+            getLogger().severe("Command 'open' not found. Check plugin.yml");
         } else {
-            getCommand("claw open").setExecutor(new ClawCommand(this));
+            getCommand("open").setExecutor(new ClawCommand(this));
         }
 
         getServer().getPluginManager().registerEvents(new ClawGUI(), this);
         OpenAIRequestHandler.initialize(this);
+
     }
 
     @Override

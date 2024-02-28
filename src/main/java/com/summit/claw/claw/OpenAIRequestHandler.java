@@ -68,7 +68,7 @@ public class OpenAIRequestHandler {
                 "4. Able to be judged on how good of a job each player did." +
                 "5. State the challenge short and sweet, only brushing on key points." +
                 "6. When done stating the challenge, end with the word \"wins the challenge. for survival\".");
-                requestBody.put("temperature", 0.7);
+                requestBody.put("temperature", 0.68);
         requestBody.put("max_tokens", 121);
         requestBody.put("top_p", 0.75);
         requestBody.put("frequency_penalty", 0.88);
