@@ -3,8 +3,25 @@ package com.summit.claw.claw;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 import static com.summit.claw.claw.ClawGUI.openInventory;
 
@@ -28,7 +45,11 @@ public class ClawCommand implements CommandExecutor {
 
         if (args[0].equalsIgnoreCase("generate")) {
             // Handle the /claw generate command
-            return generateChallenge(sender);
+            try {
+                return generateChallenge(sender);
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         if (args[0].equalsIgnoreCase("open")) {
@@ -40,7 +61,7 @@ public class ClawCommand implements CommandExecutor {
         return true;
     }
 
-    public boolean generateChallenge(CommandSender sender) {
+    public boolean generateChallenge(CommandSender sender) throws IOException, InterruptedException {
         // Generate a challenge using the OpenAI API
         String challenge = OpenAIRequestHandler.generateChallenge();
 

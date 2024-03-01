@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/claw.iml" filepath="$PROJECT_DIR$/claw.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Claw.iml" filepath="$PROJECT_DIR$/Claw.iml" />
     </modules>
   </component>
 </project>

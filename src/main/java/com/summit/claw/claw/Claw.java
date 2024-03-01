@@ -13,7 +13,6 @@ public class Claw extends JavaPlugin {
         // Register subcommands
 
         getServer().getPluginManager().registerEvents(new ClawGUI(), this);
-        OpenAIRequestHandler.initialize(this);
 
     }
 

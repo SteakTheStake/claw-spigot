@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -62,7 +63,7 @@ public class ClawGUI implements Listener {
 
     // Check for clicks on items
     @EventHandler
-    public void onInventoryClick(final @NotNull InventoryClickEvent e) {
+    public void onInventoryClick(final @NotNull InventoryClickEvent e) throws IOException, InterruptedException {
         if (!e.getInventory().equals(inventory)) return;
 
         e.setCancelled(true);

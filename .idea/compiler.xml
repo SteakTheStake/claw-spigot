@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="claw" />
+        <module name="Claw" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="claw" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
