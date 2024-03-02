@@ -62,7 +62,7 @@ public class OpenAIRequestHandler {
                 } else {
                     return "Error: Challenge not found in OpenAI response";
                 }
-            }).get();  // Wait for the future result and return
+            }).get();
 
         } catch (InterruptedException | ExecutionException e) {
             logger.severe("Error generating challenge: " + e.getMessage());

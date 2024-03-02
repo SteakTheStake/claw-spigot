@@ -12,14 +12,6 @@ commands:
     aliases:
       - cl
     usage: /<command> [open|generate]
-    open:
-      description: Opens the menu GUI for C.L.A.W.
-      usage: /claw open
-      permission: claw.open
-    generate:
-      description: Generates a challenge for the current in-game day
-      usage: /claw generate
-      permission: claw.generate
 permissions:
   claw.open:
     description: Allows players to open the C.L.A.W. GUI.
