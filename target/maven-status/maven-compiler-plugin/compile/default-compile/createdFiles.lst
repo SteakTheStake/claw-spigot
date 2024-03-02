@@ -1,4 +1,6 @@
-com\summit\claw\claw\ClawCommand.class
+com\summit\claw\claw\OpenGUICommand.class
 com\summit\claw\claw\Claw.class
 com\summit\claw\claw\OpenAIRequestHandler.class
 com\summit\claw\claw\ClawGUI.class
+com\summit\claw\claw\GenerateChallengeCommand.class
+com\summit\claw\claw\ClawCommand.class

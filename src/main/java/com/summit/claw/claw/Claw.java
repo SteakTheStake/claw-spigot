@@ -10,9 +10,9 @@ public class Claw extends JavaPlugin {
         System.out.println("C.L.A.W. has started");
         // Register commands
         getCommand("claw").setExecutor(new ClawCommand(this));
-        // Register subcommands
 
         getServer().getPluginManager().registerEvents(new ClawGUI(), this);
+        OpenAIRequestHandler.initialize(this);
 
     }
 
