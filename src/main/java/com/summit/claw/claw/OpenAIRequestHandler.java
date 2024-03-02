@@ -5,15 +5,15 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Logger;
 
 public class OpenAIRequestHandler {
@@ -37,13 +37,14 @@ public class OpenAIRequestHandler {
     }
 
     public static String generateChallenge() {
+        HttpClient client;
         try {
             JSONObject requestBody = getRequestBody();
             if (API_KEY == null || API_KEY.isEmpty() || API_KEY.equals("defaultKey")) {
                 return "API Key not configured.";
             }
 
-            HttpClient client = HttpClient.newHttpClient();
+            client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(API_URL))
                     .header("Content-Type", "application/json")
@@ -51,10 +52,19 @@ public class OpenAIRequestHandler {
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody.toString()))
                     .build();
 
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            JSONObject jsonResponse = new JSONObject(response.body());
-            return jsonResponse.getJSONObject(String.valueOf(0)).getString("output");
-        } catch (IOException | InterruptedException | JSONException e) {
+            CompletableFuture<HttpResponse<String>> responseFuture = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+            return responseFuture.thenApply(response -> {
+                String candidates = response.body();
+                System.out.println("OpenAI Response: " + candidates); // Inspect this output
+                JSONObject responseObject = new JSONObject(candidates);
+                if (responseObject.has("text")) {
+                    return responseObject.getString("text");
+                } else {
+                    return "Error: Challenge not found in OpenAI response";
+                }
+            }).get();  // Wait for the future result and return
+
+        } catch (InterruptedException | ExecutionException e) {
             logger.severe("Error generating challenge: " + e.getMessage());
             return "An error occurred while generating the challenge.";
         }
